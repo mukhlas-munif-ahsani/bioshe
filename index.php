@@ -45,5 +45,5 @@ function chargeAPI($api_url, $server_key, $request_body){
         'body' => curl_exec($ch),
         'http_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
     );
-    return $result
+    return $result;
 }
