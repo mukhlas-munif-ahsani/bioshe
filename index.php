@@ -1,10 +1,12 @@
 <?php
 
-$server_key = "SB-Mid-server-UEj2IJwm0cg_pAxa2K7RT4Fe";
+$server_key = 'SB-Mid-server-UEj2IJwm0cg_pAxa2K7RT4Fe';
 
 $is_production = false;
 
-$api_url = $is_production ? 'https://app.midtrans.com/snap/v1/transactions' : 'https://app.sandbox.midtrans.com/snap/v1/transactions';
+$api_url = $is_production ? 
+    'https://app.midtrans.com/snap/v1/transactions' :
+    'https://app.sandbox.midtrans.com/snap/v1/transactions';
 
 if(!strpos($_SERVER['REQUEST_URI'], '/charge')){
     http_response_code(404);
@@ -17,6 +19,7 @@ if($_SERVER['REQUEST_METHOD'] !== 'POST'){
 }
 
 $request_body = file_get_contents('php://input');
+
 header('Content-Type: application/json');
 
 $charge_result = chargeAPI($api_url, $server_key, $request_body);
@@ -28,7 +31,7 @@ echo $charge_result['body'];
 function chargeAPI($api_url, $server_key, $request_body){
     $ch = curl_init();
     $curl_options = array(
-        CURLOPT_URL => $snap_url,
+        CURLOPT_URL => $api_url,
         CURLOPT_RETURNTRANSFER => 1,
         CURLOPT_POST => 1,
         CURLOPT_HEADER => 0,
